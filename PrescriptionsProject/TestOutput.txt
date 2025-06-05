@@ -1,0 +1,173 @@
+--- Running tests with model: models/gemini-1.5-flash-latest ---
+Note: LLM output can be non-deterministic, so perfect matches are not guaranteed.
+      Focus on whether the key information is correctly extracted.
+
+### Test Case 1 ###
+Input Text:
+Patient diagnosed with COPD, SpO2 measured at
+87% on room air. Needs portable oxygen concentrator for use during
+exertion and sleep. Dr. Chase signed the order.
+
+Expected Output:
+{
+  "device": "portable oxygen concentrator",
+  "diagnosis": "COPD",
+  "SpO2": "87%",
+  "usage": [
+    "exertion",
+    "sleep"
+  ],
+  "ordering_provider": "Dr. Chase"
+}
+
+Actual Output:
+{
+  "device": "portable oxygen concentrator",
+  "ordering_provider": "Dr. Chase",
+  "diagnosis": "COPD",
+  "SpO2": "87%",
+  "usage": [
+    "during exertion",
+    "sleep"
+  ]
+}
+
+Result: FAILED (Mismatch)
+
+================================================================================
+
+### Test Case 2 ###
+Input Text:
+Patient has
+MS with significant mobility issues. Recommended a lightweight manual
+wheelchair with elevating leg rests. Ordered by Dr. Taub.
+
+Expected Output:
+{
+  "device": "manual wheelchair",
+  "type": "lightweight",
+  "features": [
+    "elevating leg rests"
+  ],
+  "diagnosis": "MS",
+  "ordering_provider": "Dr. Taub"
+}
+
+Actual Output:
+{
+  "device": "lightweight manual wheelchair",
+  "ordering_provider": "Dr. Taub",
+  "accessories": [
+    "elevating leg rests"
+  ],
+  "mobility_status": "significant mobility issues"
+}
+
+Result: FAILED (Mismatch)
+
+================================================================================
+
+### Test Case 3 ###
+Input Text:
+Asthma
+diagnosis confirmed. Prescribing nebulizer with mouthpiece and
+tubing. Dr. Foreman completed the documentation.
+
+Expected Output:
+{
+  "device": "nebulizer",
+  "accessories": [
+    "mouthpiece",
+    "tubing"
+  ],
+  "diagnosis": "Asthma",
+  "ordering_provider": "Dr. Foreman"
+}
+
+Actual Output:
+{
+  "device": "nebulizer",
+  "ordering_provider": "Dr. Foreman",
+  "diagnosis": "Asthma",
+  "accessories": [
+    "mouthpiece",
+    "tubing"
+  ]
+}
+
+Result: PASSED (Exact Match)
+
+================================================================================
+
+### Test Case 4 ###
+Input Text:
+Patient is
+non-ambulatory and requires hospital bed with trapeze bar and side
+rails. Diagnosis: late-stage ALS. Order submitted by Dr.
+Cuddy.
+
+Expected Output:
+{
+  "device": "hospital bed",
+  "features": [
+    "trapeze bar",
+    "side rails"
+  ],
+  "diagnosis": "ALS",
+  "mobility_status": "non-ambulatory",
+  "ordering_provider": "Dr. Cuddy"
+}
+
+Actual Output:
+{
+  "device": "hospital bed",
+  "ordering_provider": "Dr. Cuddy",
+  "add_ons": [
+    "trapeze bar",
+    "side rails"
+  ],
+  "diagnosis": "late-stage ALS",
+  "mobility_status": "non-ambulatory"
+}
+
+Result: FAILED (Mismatch)
+
+================================================================================
+
+### Test Case 5 ###
+Input Text:
+CPAP supplies
+requested. Full face mask with headgear and filters. Patient has been
+compliant. Ordered by Dr. House.
+
+Expected Output:
+{
+  "device": "CPAP supplies",
+  "components": [
+    "full face mask",
+    "headgear",
+    "filters"
+  ],
+  "compliance_status": "compliant",
+  "ordering_provider": "Dr. House"
+}
+
+Actual Output:
+{
+  "device": "CPAP",
+  "ordering_provider": "Dr. House",
+  "mask_type": "Full face mask",
+  "accessories": [
+    "headgear",
+    "filters"
+  ],
+  "compliance_status": "compliant"
+}
+
+Result: FAILED (Mismatch)
+
+================================================================================
+
+--- Test run complete ---
+
+Process finished with exit code 0
