@@ -11,37 +11,46 @@ This project runs with python version 3.12.
 # Modify the .env file
 
 The project has a .env file in /synapse/PrescriptionsProject/src/ to hold it's configuration parameters. Modify this line with your own GEMINI_API_KEY.
+```
 GEMINI_API_KEY = "Put your key here"
+```
+
 If you don't have one you can create one at https://aistudio.google.com/apikey
 
 # How to Install a virtual environment
 
 /synapse/PrescriptionsProject/ directory needs to have the virtual environment
-
+```
 > python -m venv .venv
-> This will create a virtual environment for you to use and install dependencies.
+```
+This will create a virtual environment for you to use and install dependencies.
 
 # How to activate the virtual environment
-
+```
 > .\.venv\Scripts\activate.bat (activate.sh on linux or mac)
 > (.venv)>
+```
 
 # How to deactivate the virtual environment
-
+```
 > .venv/Scripts/deactivate.bat (activate.sh on linux or mac)
+```
 
 # Installing the Requirements
-
+```
 > pip install -r requirements.txt
+```
 
 # Running the PrescriptionParser
-
+```
 > cd ./src
+
 > python PrescriptionParser.py "CPAP supplies
 > requested. Full face mask with headgear and filters. Patient has been
 > compliant. Ordered by Dr. House."
-
+```
 Response:
+```
 {
 "device": "CPAP",
 "ordering_provider": "Dr. House",
@@ -52,11 +61,14 @@ Response:
 ],
 "compliance_status": "compliant"
 }
+```
+
 
 # Running the tests for Prescription Parser
-
+```
 > python .\TestPrescriptionParser.py
 > See TestOutput.txt for the output
+```
 
 ## Approach
 
