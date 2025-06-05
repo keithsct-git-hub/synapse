@@ -80,10 +80,7 @@ exertion and sleep. Dr. Chase signed the order.
     },
     {
         "input_text": """
-Patient has
-MS with significant mobility issues. Recommended a lightweight manual
-wheelchair with elevating leg rests. Ordered by Dr. Taub.
-        """,
+Patient has MS with significant mobility issues. Recommended a lightweight manual wheelchair with elevating leg rests. Ordered by Dr. Taub.""",
         "expected_output": {
             "device": "manual wheelchair",
             "type": "lightweight",
